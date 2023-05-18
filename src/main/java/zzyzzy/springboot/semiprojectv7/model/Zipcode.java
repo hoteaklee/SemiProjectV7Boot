@@ -1,8 +1,11 @@
 package zzyzzy.springboot.semiprojectv7.model;
 
 import lombok.Data;
+import javax.persistence.*;
 
 @Data
+@Entity
+@Table(name ="Zipcode")
 public class Zipcode {
 
     private String zipcode;
@@ -11,5 +14,7 @@ public class Zipcode {
     private String dong;
     private String ri;
     private String bunji;
+    @Id
+    private Long seq;
 
 }
