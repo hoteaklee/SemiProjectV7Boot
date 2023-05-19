@@ -13,11 +13,7 @@ public class MemberDAOImpl implements MemberDAO {
 
     @Override
     public int selectLogin(Member m) {
-        int isLogin = -1;
 
-        if (memberRepository.findByUseridAndPasswd(m.getUserid(),m.getPasswd()) != null)
-            isLogin = 1;
-
-        return isLogin;
+        return memberRepository.countByUseridAndPasswd(m.getUserid(),m.getPasswd()) ;
     }
 }

@@ -11,5 +11,9 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query(" select count(userid) from Member where userid = ?1")
     List<Member> selectOneUid(String userid);
 
-    Member findByUseridAndPasswd(String userid, String passwd);
+    //로그인 처리 1
+   // Member findByUseridAndPasswd(String userid, String passwd);
+
+    //로그인 처리2
+    int countByUseridAndPasswd(String userid, String passwd);
 }
