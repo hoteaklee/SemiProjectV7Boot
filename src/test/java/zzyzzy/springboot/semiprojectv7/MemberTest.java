@@ -10,6 +10,9 @@ import zzyzzy.springboot.semiprojectv7.repository.MemberRepository;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 @SpringBootTest
 public class MemberTest {
 
@@ -53,5 +56,24 @@ public class MemberTest {
 
         memberRepository.delete(m);
     }
+
+    //로그인 테스트
+    @Test
+    @DisplayName("member login")
+    public void loginMember(){
+        Member m = new Member();
+        m.setUserid("123");
+        m.setPasswd("12");
+
+        assertNull(memberRepository.findByUseridAndPasswd(m.getUserid(),m.getPasswd()) );
+
+        m.setUserid("123");
+        m.setPasswd("123");
+
+        assertNotNull(memberRepository.findByUseridAndPasswd(m.getUserid(),m.getPasswd()) );
+    }
+
+
+
 
 }
