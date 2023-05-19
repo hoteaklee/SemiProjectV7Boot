@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name ="Zipcode")
+@Table(name ="zipcode")
 public class Zipcode {
 
     private String zipcode;
