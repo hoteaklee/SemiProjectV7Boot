@@ -20,7 +20,7 @@ public class BoardDAOImpl implements BoardDAO {
         return boardRepository.findAll();
     }
 
-    @Override
+    @Override   //검색 기능 데이타 블러오기~
     public List<Board> selectBoard(Map<String, Object> params) {
         return null;
     }
@@ -42,6 +42,7 @@ public class BoardDAOImpl implements BoardDAO {
 
     @Override
     public Board selectOneBoard(int bno) {
+        boardRepository.countViewBoard( bno);
         return boardRepository.findById((long) bno).get();
     }
 }
