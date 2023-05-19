@@ -58,7 +58,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Board readOneBoard(String bno) {
+    public Board readOneBoard(int bno) {
         return bddao.selectOneBoard(bno);
     }
 }

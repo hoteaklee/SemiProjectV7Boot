@@ -43,7 +43,7 @@ public class JoinController {
         String view = "error ";
 
         if (jnsrv.newMember(m))
-            view = "join/joinok ";
+            view = "join/joinok";
 
         return view;
     }
