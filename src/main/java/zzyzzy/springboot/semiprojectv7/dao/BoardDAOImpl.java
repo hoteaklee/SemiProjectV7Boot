@@ -4,6 +4,7 @@ package zzyzzy.springboot.semiprojectv7.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import zzyzzy.springboot.semiprojectv7.model.Board;
 import zzyzzy.springboot.semiprojectv7.repository.BoardRepository;
@@ -19,7 +20,9 @@ public class BoardDAOImpl implements BoardDAO {
 
     @Override
     public List<Board> selectBoard(int cpage) {
-        Pageable pageing = PageRequest.of(cpage,25);
+        //페이징 시 정렬 순서 지정
+        //Pageable pageing = PageRequest.of(cpage,25, Sort.by("bno").descending());
+        Pageable pageing = PageRequest.of(cpage,25, Sort.Direction.DESC,"bno");
 
         return  boardRepository.findAll(pageing).getContent();
     }
@@ -29,7 +32,7 @@ public class BoardDAOImpl implements BoardDAO {
         return null;
     }
 
-    @Override
+    @Override//게시글 총수
     public int countBoard() {
         // select ceil(count(bno)/25) from board
         int allcnt = boardRepository.countBoardBy();
