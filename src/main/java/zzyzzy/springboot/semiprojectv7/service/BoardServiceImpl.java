@@ -22,7 +22,8 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public List<Board> readBoard(int cpage, String ftype, String fkey) {
-        int stbno = (cpage - 1) * 25;
+        //int stbno = (cpage - 1) * 25;
+        int stbno = cpage - 1;
 
         // 처리시 사용할 데이터들을 해쉬맵에 담아서 보냄
         Map<String, Object> params = new HashMap<>();
