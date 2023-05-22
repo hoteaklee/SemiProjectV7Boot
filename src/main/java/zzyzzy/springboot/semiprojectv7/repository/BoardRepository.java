@@ -29,7 +29,7 @@ public interface BoardRepository extends PagingAndSortingRepository<Board, Long>
     //@Query("from Board where title like %:fkey% ")
     List<Board> findByTitleLike(Pageable paging, String fkey);
 
-    List<Board> findByTitleOrContentLike(Pageable paging, String fkey1, String fkey2);
+    List<Board> findByTitleLikeOrContentLike(Pageable paging, String fkey1, String fkey2);
 
     List<Board> findByUserid(Pageable paging, String fkey);
 
