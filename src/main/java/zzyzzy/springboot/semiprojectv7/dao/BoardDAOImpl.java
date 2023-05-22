@@ -67,7 +67,17 @@ public class BoardDAOImpl implements BoardDAO {
 
     @Override
     public int countBoard(Map<String, Object> params) {
-        return 0;
+        String fkey = params.get("fkey").toString() ;
+        String ftype = params.get("ftype").toString() ;
+        int cnt = 0;
+        switch (ftype) {
+            case "title":  cnt = boardRepository.countByTitleContains(fkey); break;
+            case "titcont": cnt =boardRepository.countByTitleContainsOrContentContains(fkey, fkey);break;
+            case "userid": cnt =boardRepository.countByUserid(fkey);break;
+            case "content": cnt = boardRepository.countByContentContains(fkey);
+        }
+
+        return (int)Math.ceil(cnt/25);
     }
 
     @Override
