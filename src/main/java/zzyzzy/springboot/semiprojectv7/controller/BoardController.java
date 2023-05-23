@@ -3,6 +3,7 @@ package zzyzzy.springboot.semiprojectv7.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import zzyzzy.springboot.semiprojectv7.model.Board;
 import zzyzzy.springboot.semiprojectv7.service.BoardService;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
@@ -58,12 +60,13 @@ public class BoardController {
     }
 
     @PostMapping("/write")
-    public String writeok(Board bd) {
-        String viewPage = "error";
+    public String writeok(@Valid Board board, BindingResult br) {
+        String viewPage = "redirect:/board/list?cpg=1";
 
-        if (bdsrv.newBoard(bd))
-            viewPage = "redirect:/board/list?cpg=1";
-
+        if (br.hasErrors()) // 유효성 검사시 오류가 발생하면
+            viewPage = "board/write";
+        else
+            bdsrv.newBoard(board);
         return viewPage;
     }
 
