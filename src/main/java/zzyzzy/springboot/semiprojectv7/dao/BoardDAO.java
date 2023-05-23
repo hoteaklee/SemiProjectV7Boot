@@ -7,10 +7,10 @@ import java.util.Map;
 
 public interface BoardDAO {
     Map<String, Object> selectBoard(int cpage);
-    List<Board> selectBoard(Map<String, Object> params);
+    Map<String, Object> selectBoard(Map<String, Object> params);
 
     //int countBoard();
-    int countBoard(Map<String, Object> params);
+    //int countBoard(Map<String, Object> params);
 
     int insertBoard(Board bd);
 
