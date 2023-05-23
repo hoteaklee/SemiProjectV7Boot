@@ -49,6 +49,8 @@
               <input type="text" name="userid" id="userid"
                      class="form-control border-danger bg-light"
                      readonly value="abc123">
+              <span th:if="${#fields.hasErrors('userid')}"
+                    th:errors="*{userid}" class="text-warning"></span>
             </div>
           </div>
 
@@ -58,6 +60,8 @@
             <div class="col-6">
                     <textarea name="content" id="content"
                               class="form-control border-danger" rows="15"></textarea>
+              <span th:if="${#fields.hasErrors('content')}"
+                    th:errors="*{content}" class="text-warning"></span>
             </div>
           </div>
 
