@@ -2,6 +2,7 @@ package zzyzzy.springboot.semiprojectv7.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,7 +49,11 @@ public class BoardController {
     }
 
     @GetMapping("/write")
-    public String write() {
+    public String write(Model m) {
+
+        // validation을 위한 첫번때 코드
+        m.addAttribute("board", new Board());
+
         return "board/write";
     }
 
