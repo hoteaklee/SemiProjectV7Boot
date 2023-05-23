@@ -29,7 +29,7 @@
       </div>
 
       <div class="row mt-2 offset-2 col-8">
-        <form class="card card-body bg-light" name="bdfrm" id="bdfrm">
+        <form class="card card-body bg-light" name="bdfrm" id="bdfrm" th:object="${board}">
 
           <div class="row">
             <label class="col-3 col-form-label text-danger text-end"
@@ -37,6 +37,8 @@
             <div class="col-6">
               <input type="text" name="title" id="title"
                      class="form-control border-danger">
+              <p th:if="${#fields.hasErrors('title')}"
+                        th:errors="*{title}"></p> <!-- form 필드 객체안에 에러가 있다면 erros메시지 출력-->
             </div>
           </div>
 
