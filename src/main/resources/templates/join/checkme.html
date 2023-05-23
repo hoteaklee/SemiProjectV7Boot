@@ -128,8 +128,8 @@
       </div>
 
       <div class="card card-body bg-light mt-5 mx-3">
-        <h3 class="mb-5">실명확인 회원가입</h3>
-        <form id="checkfrm2" name="checkfrm2">
+        <h3 class="mb-5" >실명확인 회원가입</h3>
+        <form id="checkfrm2" name="checkfrm2" th:object="${checkme}">
           <div class="row">
             <div class="col-5 offset-1">
               <div class="row mb-3">
@@ -137,7 +137,11 @@
                        class="col-3 col-form-label text-warning text-end">이름</label>
                 <div class="col-6">
                   <input type="text" name="name" id="name2"
-                         class="form-control border-warning"></div>
+                         class="form-control border-warning">
+                  <span th:if="${#fields.hasErrors('name')}"
+                        th:errors="*{name}" class="text-danger"></span>
+                </div>
+
               </div>
               <div class="row mb-2">
                 <label for="jumin1"
@@ -145,11 +149,16 @@
                 <div class="col-3">
                   <input type="text" name="jumin1" id="jumin1"
                          class="form-control border-warning">
+                  <span th:if="${#fields.hasErrors('jumin1')}"
+                        th:errors="*{jumin1}" class="text-danger"></span>
                 </div>
                 <div class="col-3">
                   <input type="text" name="jumin2" id="jumin2"
                          class="form-control border-warning">
+                  <span th:if="${#fields.hasErrors('jumin2')}"
+                        th:errors="*{jumin2}" class="text-danger"></span>
                 </div>
+
               </div>
               <div class="row mb-3">
                 <label class="col-3 col-form-label text-warning">&nbsp;</label>
