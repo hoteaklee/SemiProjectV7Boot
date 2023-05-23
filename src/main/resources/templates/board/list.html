@@ -28,16 +28,18 @@
     // startPage = ((cp - 1) / 10) * 10 + 1
     // endPage = startPage + 10 - 1-->
 
-    <th:block th:if="${cpg > cntpg}"> <!--총페이지보다 많수 페이지수 입력하면 마지막페이지로 이동-->
-      <script th:inline="javascript">
-        location.href = "/board/list?cpg=" + [[${cntpg}]];
-      </script>
-    </th:block>
+
 
 
     <!-- 번수 선언  th:with = 변수명 ${변수값}}-->
     <div id="main" th:with="pglink=${ (#strings.isEmpty(param.fkey)) ?
      '/board/list?cpg=' : '/board/find?ftype=' + param.ftype + '&fkey=' + param.fkey + '&cpg='}">
+
+      <th:block th:if="${cpg > cntpg}"> <!--총페이지보다 많수 페이지수 입력하면 마지막페이지로 이동-->
+        <script th:inline="javascript">
+          location.href = [[${pglink}]] + [[${cntpg}]];
+        </script>
+      </th:block>
 
 
       <div class="mt-5">
