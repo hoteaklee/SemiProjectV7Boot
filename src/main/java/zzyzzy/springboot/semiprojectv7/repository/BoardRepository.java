@@ -24,7 +24,7 @@ public interface BoardRepository extends PagingAndSortingRepository<Board, Long>
 
 
     //@Query("select ceil(count(bno)/25) from Board ")
-    int countBoardBy();
+    /*int countBoardBy();*/
 
     //@Query("from Board where title like %:fkey% ")
     List<Board> findByTitleContains(Pageable paging, String fkey);

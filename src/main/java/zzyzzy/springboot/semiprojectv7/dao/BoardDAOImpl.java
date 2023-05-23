@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import zzyzzy.springboot.semiprojectv7.model.Board;
 import zzyzzy.springboot.semiprojectv7.repository.BoardRepository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,12 +20,16 @@ public class BoardDAOImpl implements BoardDAO {
     BoardRepository boardRepository;
 
     @Override
-    public List<Board> selectBoard(int cpage) {
+    public Map<String, Object> selectBoard(int cpage) {
         //페이징 시 정렬 순서 지정
         //Pageable pageing = PageRequest.of(cpage,25, Sort.by("bno").descending());
         Pageable pageing = PageRequest.of(cpage,25, Sort.Direction.DESC,"bno");
 
-        return  boardRepository.findAll(pageing).getContent();
+        Map<String, Object> bds = new HashMap<>();
+        bds.put("bdlist",boardRepository.findAll(pageing).getContent());
+        bds.put("cntpg",boardRepository.findAll(pageing).getTotalPages());
+
+        return  bds;
     }
 
     @Override   //검색 기능 데이타 블러오기~
@@ -58,12 +63,12 @@ public class BoardDAOImpl implements BoardDAO {
         return result;
     }
 
-    @Override//게시글 총수
+/*    @Override//게시글 총수
     public int countBoard() {
         // select ceil(count(bno)/25) from board
         int allcnt = boardRepository.countBoardBy();
-        return (int)Math.ceil(allcnt/25);
-    }
+        return (int)Math.ceil(allcnt/25+1);
+    }*/
 
     @Override
     public int countBoard(Map<String, Object> params) {
@@ -77,7 +82,7 @@ public class BoardDAOImpl implements BoardDAO {
             case "content": cnt = boardRepository.countByContentContains(fkey);
         }
 
-        return (int)Math.ceil(cnt/25);
+        return (int)Math.ceil(cnt/25+1);
     }
 
     @Override

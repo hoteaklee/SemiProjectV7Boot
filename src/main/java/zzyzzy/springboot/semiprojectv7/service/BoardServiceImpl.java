@@ -15,7 +15,7 @@ public class BoardServiceImpl implements BoardService {
     @Autowired private BoardDAO bddao;
 
     @Override
-    public List<Board> readBoard(int cpage) {
+    public Map<String, Object> readBoard(int cpage) {
        //int stbno = (cpage - 1) * 25;
         return bddao.selectBoard(cpage -1);
     }
@@ -34,10 +34,10 @@ public class BoardServiceImpl implements BoardService {
         return bddao.selectBoard(params);
     }
 
-    @Override
-    public int countBoard() {
-        return bddao.countBoard();
-    }
+//    @Override
+//    public int countBoard() {
+//        return bddao.countBoard();
+//    }
 
     @Override
     public int countBoard(String ftype, String fkey) {

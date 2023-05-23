@@ -9,6 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 import zzyzzy.springboot.semiprojectv7.model.Board;
 import zzyzzy.springboot.semiprojectv7.service.BoardService;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/board")
 public class BoardController {
@@ -21,10 +23,12 @@ public class BoardController {
         mv.setViewName("board/list");
         if (cpg == null || cpg == 0) cpg = 1;
 
-        mv.addObject("bdlist", bdsrv.readBoard(cpg));
-        mv.addObject("cpg", cpg);
+        Map<String, Object> bds = bdsrv.readBoard(cpg);
+
+        mv.addObject("bdlist", bds.get("bdlist") );
+        mv.addObject("cpg", cpg);//현재페이지
         mv.addObject("stpg", ((cpg - 1) / 10) * 10 + 1);
-        mv.addObject("cntpg", bdsrv.countBoard());
+        mv.addObject("cntpg", bds.get("cntpg") );//총페이지
 
         return mv;
     }
