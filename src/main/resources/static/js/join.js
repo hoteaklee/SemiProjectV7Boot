@@ -69,7 +69,7 @@ joinbtn?.addEventListener('click', ()=>{
         joinfrm.phone.value = joinfrm.tel1.value + '-' + joinfrm.tel2.value + '-' + joinfrm.tel3.value;
 
         joinfrm.method = 'post';
-        joinfrm.action = '/join/joinok';
+        joinfrm.action = '/join/joinme';
         joinfrm.submit();
     }
 
