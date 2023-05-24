@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/pilot")
@@ -38,8 +39,14 @@ public class PilotController {
             // 업로드한 파일크기 알아내기
             m.addAttribute("filesize", attach.getSize()/1024);
 
+            // 겹치치 않는 파일명 작성을 위해 유니크한 값 생성 1
+            UUID uuid = UUID.randomUUID();
+            m.addAttribute("uuid", uuid);
+
+            // 겹치치 않는 파일명 작성을 위해 유니크한 값 생성 2
+
             // 업로드한 파일 저장하기
-            attach.transferTo(new File("C:/Java/bootUpload/" + attach.getOriginalFilename()));
+            attach.transferTo(new File("C:/Java/bootUpload/" + uuid + attach.getOriginalFilename()));
         }
 
 
