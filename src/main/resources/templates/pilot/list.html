@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/template}">
+
+  <th:bock layout:fragment="content">
+    <div id="main">
+      <div class="mt-5">
+        <i class="fa-solid fa-images fa-2xl"> 업로드 리스트 </i>
+        <hr>
+      </div>
+
+      <div>
+        <p th:text="${title}"></p>
+        <p th:text="${content}"></p>
+
+        <p th:text="${attach}"></p>
+        <p th:text="${filename}"></p>
+        <p th:text="${filetype}"></p>
+        <p th:text="|${filesize} KB|"></p>
+      </div>
+
+    </div>
+
+
+  </th:bock>
+
+</html>

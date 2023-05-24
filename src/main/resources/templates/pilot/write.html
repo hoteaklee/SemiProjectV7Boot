@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/template}">
+
+  <th:bock layout:fragment="content">
+    <div id="main">
+
+
+      <div class="mt-5">
+        <i class="fa-solid fa-pen-to-square fa-2xl"> 파일럿 프로그램 </i>
+        <hr>
+      </div>
+
+      <div class="row mt-5">
+        <div class="row offset-2 col-4">
+          <h4><i class="fa fa-plus-circle"> </i> 새글쓰기</h4>
+        </div>
+        <div class="col-4 text-end">
+          <button type="button" class="btn btn-light">
+            <i class="fa fa-list"> </i> 목록으로</button>
+        </div>
+      </div>
+
+      <div class="row mt-2 offset-2 col-8">
+        <form class="card card-body bg-light" name="pfrm" id="pfrm" >
+
+          <div class="row">
+            <label class="col-3 col-form-label text-danger text-end"
+                   for="title">제목</label>
+            <div class="col-6">
+              <input type="text" name="title" id="title"
+                     class="form-control border-danger">
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <label class="col-3 col-form-label text-danger text-end"
+                   for="userid">작성자</label>
+            <div class="col-6">
+              <input type="text" name="userid" id="userid"
+                     class="form-control border-danger bg-light"
+                     readonly value="abc123">
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <label class="col-3 col-form-label text-danger text-end"
+                   for="content">본문</label>
+            <div class="col-6">
+                    <textarea name="content" id="content"
+                              class="form-control border-danger" rows="15"></textarea>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <label class="col-3 col-form-label text-danger text-end"
+                   for="attach">첨부파일</label>
+            <div class="col-6">
+              <input type="file" name="attach" id="attach"
+                     class="form-control border-danger bg-light">
+            </div>
+          </div>
+
+          <div class="row mt-4 justify-content-center">
+            <hr class="w-75">
+            <div class="text-center">
+              <button type="button" id="writebtn"
+                      class="btn btn-primary">
+                <i class="fa fa-check"> </i>입력완료
+              </button>
+              <button type="button" id="cancelbtn"
+                      class="btn btn-danger">
+                <i class="fa fa-remove"> </i>입력취소
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+
+    <script>
+      const writebtn = document.querySelector("#writebtn");
+      writebtn?.addEventListener('click', () => {
+        const pfrm = document.forms.pfrm;
+        if (pfrm.title.value === '') alert('제목을 작성하세요!');
+        else if (pfrm.content.value === '') alert('본문을 작성하세요!');
+        else {
+          pfrm.method = 'post';
+          pfrm.enctype = 'multipart/form-data';
+          pfrm.submit();
+        }
+      });
+
+    </script>
+
+  </th:bock>
+
+</html>
