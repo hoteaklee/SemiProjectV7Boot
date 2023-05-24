@@ -129,9 +129,9 @@
               <div class="col-4">
                 <input type="text" name="addr2" id="addr2"
                        class="form-control border-danger" th:value="${member.addr2}">
-                <span th:if="${#fields.hasErrors('addr2')}"
-                      th:errors="*{addr2}" class="text-warning"></span>
               </div>
+              <span class="col text-warning"
+                      th:if="${#fields.hasErrors('addr2')}" th:errors="*{addr2}"></span>
             </div>
 
             <div class="row col-11 offset-1 mb-3 align-items-center">
@@ -145,10 +145,10 @@
                   <input type="text" name="email2" id="email2"
                          class="form-control border-danger bg-light" readonly th:value="${member.email2}">
                 </div>
-                <span class="col text-warning"
-                      th:if="${#fields.hasErrors('email1') or #fields.hasErrors('email2')}"
-                      th:errors="*{email1}" ></span>
               </div>
+              <span class="col text-warning"
+                    th:if="${#fields.hasErrors('email1') or #fields.hasErrors('email2')}"
+                    th:errors="*{email1}" ></span>
               <div class="col-2">
                 <select class="form-select border-danger" id="email3">
                   <option>선택하세요</option>
