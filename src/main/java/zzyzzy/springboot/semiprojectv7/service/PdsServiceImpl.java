@@ -15,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service("pdssrv")
@@ -76,6 +77,11 @@ public class PdsServiceImpl implements PdsService{
     @Override
     public void downfile(int pno) {
        pdsdao.countDownload(pno);
+    }
+
+    @Override
+    public List<String> readFtype() {
+        return pdsdao.selectFtype();
     }
 
 

@@ -11,6 +11,7 @@ import zzyzzy.springboot.semiprojectv7.repository.PdsRepository;
 import zzyzzy.springboot.semiprojectv7.repository.PdsaRepository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository("pdsdao")
@@ -61,6 +62,11 @@ public class PdsDAOImpl implements PdsDAO{
     @Override
     public void countDownload(int pno) {
         pdsaRepository.countDownByPno(pno);
+    }
+
+    @Override
+    public List<String> selectFtype() {
+        return pdsaRepository.findByFtypes();
     }
 
 
