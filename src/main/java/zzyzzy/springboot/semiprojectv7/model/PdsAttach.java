@@ -19,6 +19,6 @@ public class PdsAttach {
     private String ftype;
     private String fsize;
     @Column(insertable = false, updatable = false)
-    private String fdowns;
+    private String fdown;
     private Integer pno;
 }
