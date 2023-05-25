@@ -28,7 +28,7 @@ public class PdsController {
         mv.setViewName("pds/list");
         if (cpg == null || cpg == 0) cpg = 1;
 
-        Map<String, Object> pds = pdssrv.readpds(cpg);
+        Map<String, Object> pds = pdssrv.readPds(cpg);
 
         mv.addObject("pdslist", pds.get("pdslist") );
         mv.addObject("cpg", cpg);//현재페이지
@@ -62,7 +62,7 @@ public class PdsController {
     public String view(int pno, Model m){
 
         m.addAttribute("pds",pdssrv.readOnePds(pno));
-        m.addAttribute("attach",pdssrv.readPdsOneAttach(pno));
+        m.addAttribute("attach",pdssrv.readOnePdsAttach(pno));
 
         return "pds/view";
     }
