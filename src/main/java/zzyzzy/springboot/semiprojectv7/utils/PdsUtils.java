@@ -1,11 +1,17 @@
 package zzyzzy.springboot.semiprojectv7.utils;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.UriUtils;
 import zzyzzy.springboot.semiprojectv7.model.PdsAttach;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Map;
@@ -45,7 +51,7 @@ public class PdsUtils {
         String savefname = saveDir + fname + pinfo.get("uuid") + "." + pa.getFtype();
 
         try {
-            attach.transferTo(new File(savefname));
+            attach.transferTo(new File(savefname)); // 업로드한 파일 저장하기
         } catch (Exception ex){
             System.out.println("업로드중 오류 발생!!");
             ex.printStackTrace();
@@ -55,17 +61,46 @@ public class PdsUtils {
     }
 
 
+    public HttpHeaders getHeader(String fname, String uuid) {
+        // 파일이름에 한글이 포함된 경우 적절한 인코딩 작업 수행
+        fname = UriUtils.encode(fname, StandardCharsets.UTF_8);
 
+        //다운로드할 파일의 전체 경로 작성
+        String dfname = makeDfname(fname, uuid);
 
+        HttpHeaders header = new HttpHeaders();
+        try {
+            // MIME 타입 지정
+            // 브라우저에 다운로드할 파일에 대한 정보 제공
+            header.add("Content-Type", Files.probeContentType(Paths.get(dfname)));
+            header.add("Content-Disposition",
+                    "attachment; filename=" + fname + "");
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
 
+        return header;
+    }
 
+    private String makeDfname(String fname, String uuid) {
+        int pos = fname.lastIndexOf(".");
+        String name = fname.substring(0,pos);
+        String ext = fname.substring(pos + 1);
 
+        return saveDir + name + uuid + "." + ext;
+    }
 
+    public UrlResource getResource(String fname, String uuid) {
+        // 파일이름에 한글이 포함된 경우 적절한 인코딩 작업 수행
+        fname = UriUtils.encode(fname, StandardCharsets.UTF_8);
 
-
-
-
-
-
-
+        // 다운로드할 파일 객체 생석
+        UrlResource resource = null;
+        try {
+            resource = new UrlResource("file:" + makeDfname(fname,uuid));
+        } catch (Exception ex){
+            ex.printStackTrace();;
+        }
+        return resource;
+    }
 }
