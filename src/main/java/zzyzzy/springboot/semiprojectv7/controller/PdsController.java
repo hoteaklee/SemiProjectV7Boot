@@ -42,7 +42,7 @@ public class PdsController {
         mv.addObject("cpg", cpg);//현재페이지
         mv.addObject("stpg", ((cpg - 1) / 10) * 10 + 1);
         mv.addObject("cntpg", pds.get("cntpg") );//총페이지
-        mv.addObject("ftypes", pds.get("ftypes") );
+        mv.addObject("ftypes", ftypes );
 
         return mv;
     }

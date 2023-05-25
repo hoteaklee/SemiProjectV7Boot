@@ -21,7 +21,7 @@
 
 
       <div class="mt-5">
-        <i class="fa-solid fa-pen-to-square fa-2xl"> 자료실 </i>
+        <i class="fa-solid fa-download fa-2xl"> 자료실 </i>
         <hr>
       </div>
 
@@ -75,12 +75,12 @@
               <th>1345</th></tr>
 
 
-              <tr th:each="pds:${pdslist}">
+              <tr th:each="pds, stat :${pdslist}"> <!--stat은  반복처리 할때 순번을 알수있음-->
                 <td th:text="${pds.pno}"></td>
                 <td><a th:href="|/pds/view?pno=${pds.pno}|" th:text="${pds.title}"></a>&nbsp;</td>
                 <td th:text="${pds.userid}">&nbsp;</td>
                 <td th:text="${#strings.substring(pds.regdate,0,10)}">&nbsp;</td>
-                <td>&nbsp;</td>
+                <td><img th:src="|/assets/img/ftype/${ftypes[__${stat.index}__]}.png|" width="30" height="30"></td>
                 <td th:text="${pds.thumbs}">&nbsp;</td>
                 <td th:text="${pds.views}">&nbsp;</td></tr>
 
