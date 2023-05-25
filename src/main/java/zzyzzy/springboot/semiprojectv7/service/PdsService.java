@@ -11,9 +11,9 @@ public interface PdsService {
     Map<String, Object> newPds(Pds pds);
     boolean newPdsAttach(MultipartFile attach, Map<String, Object> pinfo);
 
-    Map<String, Object> readBoard(Integer cpg);
+    Map<String, Object> readPds(Integer cpg);
 
-    Pds readPds(int pno);
+    Pds readOnePds(int pno);
 
-    PdsAttach readPdsAttach(int pno);
+    PdsAttach readOnePdsAttach(int pno);
 }

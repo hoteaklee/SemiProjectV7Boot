@@ -28,12 +28,12 @@ public class PdsController {
         mv.setViewName("pds/list");
         if (cpg == null || cpg == 0) cpg = 1;
 
-        Map<String, Object> bds = pdssrv.readBoard(cpg);
+        Map<String, Object> pds = pdssrv.readpds(cpg);
 
-        mv.addObject("pdslist", bds.get("pdslist") );
+        mv.addObject("pdslist", pds.get("pdslist") );
         mv.addObject("cpg", cpg);//현재페이지
         mv.addObject("stpg", ((cpg - 1) / 10) * 10 + 1);
-        mv.addObject("cntpg", bds.get("cntpg") );//총페이지
+        mv.addObject("cntpg", pds.get("cntpg") );//총페이지
 
         return mv;
     }
@@ -61,8 +61,8 @@ public class PdsController {
     @GetMapping("/view")
     public String view(int pno, Model m){
 
-        m.addAttribute("pds",pdssrv.readPds(pno));
-        m.addAttribute("attach",pdssrv.readPdsAttach(pno));
+        m.addAttribute("pds",pdssrv.readOnePds(pno));
+        m.addAttribute("attach",pdssrv.readPdsOneAttach(pno));
 
         return "pds/view";
     }
