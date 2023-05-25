@@ -1,11 +1,17 @@
 package zzyzzy.springboot.semiprojectv7.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import zzyzzy.springboot.semiprojectv7.model.Pds;
 import zzyzzy.springboot.semiprojectv7.model.PdsAttach;
 import zzyzzy.springboot.semiprojectv7.repository.PdsRepository;
 import zzyzzy.springboot.semiprojectv7.repository.PdsaRepository;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Repository("pdsdao")
 public class PdsDAOImpl implements PdsDAO{
@@ -25,5 +31,18 @@ public class PdsDAOImpl implements PdsDAO{
     @Override
     public int insertPdsAttach(PdsAttach pa) {
         return Math.toIntExact(pdsaRepository.save(pa).getPano());
+    }
+
+    @Override
+    public Map<String, Object> selectPds(int cpg) {
+        //페이징 시 정렬 순서 지정
+        Pageable paging = PageRequest.of(cpg,25, Sort.Direction.DESC,"pno");
+
+        Map<String, Object> pds = new HashMap<>();
+        pds.put("pdslist",pdsRepository.findAll(paging).getContent());
+        pds.put("cntpg",pdsRepository.findAll(paging).getTotalPages());
+
+
+        return pds;
     }
 }
