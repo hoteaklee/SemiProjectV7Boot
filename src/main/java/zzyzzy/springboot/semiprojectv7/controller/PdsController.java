@@ -81,6 +81,9 @@ public class PdsController {
         HttpHeaders header = pdssrv.getHeader(fname, uuid);
         UrlResource resource = pdssrv.getResource(fname, uuid);
 
+        // 다운로드 수 증가
+        pdssrv.downfile(pno);
+
         return ResponseEntity.ok().headers(header).body(resource); //리소스는 그파일의 내용을 바디로 보내줌
     }
 

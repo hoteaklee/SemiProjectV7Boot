@@ -73,5 +73,10 @@ public class PdsServiceImpl implements PdsService{
         return pdsUtils.getResource(fname, uuid);
     }
 
+    @Override
+    public void downfile(int pno) {
+       pdsdao.countDownload(pno);
+    }
+
 
 }
