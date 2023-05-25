@@ -47,5 +47,15 @@ public class PdsServiceImpl implements PdsService{
         return pdsdao.selectPds(cpg -1);
     }
 
+    @Override
+    public Pds readPds(int pno) {
+        return pdsdao.selectOnePds(pno);
+    }
+
+    @Override
+    public PdsAttach readPdsAttach(int pno) {
+        return pdsdao.selectOnePdsAttach(pno);
+    }
+
 
 }
