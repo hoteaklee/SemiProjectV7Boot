@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import zzyzzy.springboot.semiprojectv7.model.Pds;
 import zzyzzy.springboot.semiprojectv7.service.PdsService;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/pds")
 public class PdsController {
@@ -34,9 +36,12 @@ public class PdsController {
     public String writeok(Pds pds, MultipartFile attach){  //pds, attach 가져옴
         String viewPage = "error";
 
-        int pno = pdssrv.newPds(pds);
-         if (pdssrv.newPdsAttach(attach, pno))
-             viewPage = "redirect:/pds/list";
+        Map<String, Object> pinfo = pdssrv.newPds(pds);
+
+        if (!attach.isEmpty())  //첨부파일이 존재한다면 밑에 실행
+            pdssrv.newPdsAttach(attach, pinfo);
+
+        viewPage = "redirect:/pds/list";
 
         return viewPage;
     }
