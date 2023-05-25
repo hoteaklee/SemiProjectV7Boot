@@ -1,5 +1,7 @@
 package zzyzzy.springboot.semiprojectv7.service;
 
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.multipart.MultipartFile;
 import zzyzzy.springboot.semiprojectv7.model.Pds;
 import zzyzzy.springboot.semiprojectv7.model.PdsAttach;
@@ -16,4 +18,8 @@ public interface PdsService {
     Pds readOnePds(int pno);
 
     PdsAttach readOnePdsAttach(int pno);
+
+    HttpHeaders getHeader(String fname, String uuid);
+
+    UrlResource getResource(String fname, String uuid);
 }
