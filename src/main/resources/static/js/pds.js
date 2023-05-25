@@ -11,3 +11,10 @@ writebtn?.addEventListener('click', () => {
         pdsfrm.submit();
     }
 });
+
+//목록보기
+//새글쓰기 버튼
+const newbtn = document.querySelector("#newbtn");
+newbtn?.addEventListener('click', () => {
+    location.href = '/pds/write';
+});

@@ -4,15 +4,130 @@
       layout:decorate="~{layout/template}">
 
   <th:bock layout:fragment="content">
-    <div id="main">
+
+
+
+
+
+    <!-- 번수 선언  th:with = 변수명 ${변수값}}-->
+    <div id="main" th:with="pglink=${ (#strings.isEmpty(param.fkey)) ?
+     '/board/list?cpg=' : '/board/find?ftype=' + param.ftype + '&fkey=' + param.fkey + '&cpg='}">
+
+      <th:block th:if="${cpg > cntpg}"> <!--총페이지보다 많수 페이지수 입력하면 마지막페이지로 이동-->
+        <script th:inline="javascript">
+          location.href = [[${pglink}]] + [[${cntpg}]];
+        </script>
+      </th:block>
+
+
       <div class="mt-5">
-        <i class="fa-solid fa-download fa-2xl"> 자료실 </i>
+        <i class="fa-solid fa-pen-to-square fa-2xl"> 자료실 </i>
         <hr>
+      </div>
+
+      <div class="row mt-5">
+        <div class="row offset-2 col-6">
+          <th:block th:if="${not #strings.isEmpty(session.UID)}">
+            <div class="col-3">
+              <select class="form-select" id="findtype">
+                <option value="title">제목</option>
+                <option value="titcont">제목+내용</option>
+                <option value="content">내용</option>
+                <option value="userid">작성자</option>
+              </select></div>
+            <div class="col-4">
+              <input type="text" class="form-control col-2" id="findkey"
+                     th:value="${param.fkey}"></div>
+            <div class="col-3">
+              <button type="button" class="btn btn-light" id="findbtn">
+                <i class="fa-solid fa-magnifying-glass"> </i> 검색하기</button></div>
+          </th:block>
+          &nbsp;
+        </div>
+        <div class="col-2 text-end">
+          <th:block th:if="${session.UID ne null}">
+            <button type="button" class="btn btn-light" id="newbtn">
+              <i class="fa fa-plus-circle"> </i> 새글쓰기</button>
+          </th:block>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="offset-2 col-8">
+          <table class="table table-striped tbborder">
+            <thead class="thbg">
+            <tr><th style="width: 7%">번호</th>
+              <th>제목</th>
+              <th style="width: 13%">작성자</th>
+              <th style="width: 13%">작성일</th>
+              <th style="width: 5%">첨부</th>
+              <th style="width: 7%">추천</th>
+              <th style="width: 7%">조회</th></tr>
+            </thead>
+            <tbody>
+            <tr><th>공지</th>
+              <th><span class="badge text-bg-danger">hot!</span>
+                석가탄신일·성탄절 대체공휴일 확정</th>
+              <th>운영자</th>
+              <th>2023-05-04</th>
+              <th>&nbsp;</th>
+              <th>567</th>
+              <th>1345</th></tr>
+
+
+              <tr th:each="bd:${pdslist}">
+                <td th:text="${pds.pno}"></td>
+                <td><a th:href="|/pds/view?pno=${pds.pno}|" th:text="${pds.title}"></a>&nbsp;</td>
+                <td th:text="${pds.userid}">&nbsp;</td>
+                <td th:text="${#strings.substring(pds.regdate,0,10)}">&nbsp;</td>
+                <td>&nbsp;</td>
+                <td th:text="${pds.thumbs}">&nbsp;</td>
+                <td th:text="${pds.views}">&nbsp;</td></tr>
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="offset-2 col-8">
+          <nav>
+            <ul class="pagination justify-content-center">
+
+              <th:block th:if="${cpg gt 1}">
+                <li class="page-item">
+                <a class="page-link" th:href="|${pglink}1|">처음</a></li>
+              </th:block>
+
+              <!--<th:block th:if="${cpg - 1 gt 0}"><li class="page-item"></th:block>
+              <th:block th:unless="${cpg - 1 lt 0}"><li class="page-item disabled"></th:block>-->
+              <li th:class="${ (cpg - 1 gt 0) ? 'page-item' : 'page-item disabled'}">
+              <a class="page-link" th:href="|${pglink}${cpg - 1}|">이전</a></li>
+
+              <th:block th:each="i : ${#numbers.sequence(stpg, stpg+9)}">
+                <th:block th:if="${i le cntpg}">
+                  <li th:class="${ i ne cpg ? 'page-item' : 'page-item active'}">
+                    <a class="page-link" th:href="|${pglink}${i}|" th:text="${i}"></a></li>
+                </th:block>
+              </th:block>
+
+              <li th:class="${ (cpg+1) le cntpg ? 'page-item' : 'page-item disabled'}">
+              <a class="page-link" th:href="|${pglink}${cpg+1}|">다음</a></li>
+
+              <th:block th:if="${cpg lt cntpg}">
+                <li class="page-item">
+                <a class="page-link" th:href="|${pglink}${cntpg}|">끝</a></li>
+              </th:block>
+
+            </ul>
+          </nav>
+        </div>
       </div>
 
     </div>
 
-    <script src="/assets/js/pds.js"></script>
+    <script src="/assets/js/board.js"></script>
 
   </th:bock>
 
