@@ -60,7 +60,7 @@
               <th>제목</th>
               <th style="width: 13%">작성자</th>
               <th style="width: 13%">작성일</th>
-              <th style="width: 5%">첨부</th>
+              <th style="width: 7%">첨부</th>
               <th style="width: 7%">추천</th>
               <th style="width: 7%">조회</th></tr>
             </thead>
@@ -75,7 +75,7 @@
               <th>1345</th></tr>
 
 
-              <tr th:each="bd:${pdslist}">
+              <tr th:each="pds:${pdslist}">
                 <td th:text="${pds.pno}"></td>
                 <td><a th:href="|/pds/view?pno=${pds.pno}|" th:text="${pds.title}"></a>&nbsp;</td>
                 <td th:text="${pds.userid}">&nbsp;</td>
