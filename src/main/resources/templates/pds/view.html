@@ -43,6 +43,8 @@
           </td></tr>
           <tr>
             <td class="vinfo" colspan="2">
+              <img th:src="|/assets/img/ftype/${attach.ftype}.png|"
+                  width="35" height="35">
               <a th:href="|/pds/down?pno=${pds.pno}|" th:text="${attach.fname}"></a>
               <span th:text="|(${attach.fsize} KB/${attach.fdown}회 다운로드)|"></span>
             </td>
