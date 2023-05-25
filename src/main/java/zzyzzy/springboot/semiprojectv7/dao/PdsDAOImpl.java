@@ -48,6 +48,8 @@ public class PdsDAOImpl implements PdsDAO{
 
     @Override
     public Pds selectOnePds(int pno) {
+        pdsRepository.countViewById(pno); // 조회수 증가
+
         return pdsRepository.findById((long) pno).get();
     }
 
