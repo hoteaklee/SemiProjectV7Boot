@@ -9,6 +9,7 @@ import org.springframework.web.util.UriUtils;
 import zzyzzy.springboot.semiprojectv7.dao.PdsDAO;
 import zzyzzy.springboot.semiprojectv7.model.Pds;
 import zzyzzy.springboot.semiprojectv7.model.PdsAttach;
+import zzyzzy.springboot.semiprojectv7.model.PdsReply;
 import zzyzzy.springboot.semiprojectv7.utils.PdsUtils;
 
 import java.nio.charset.StandardCharsets;
@@ -82,6 +83,11 @@ public class PdsServiceImpl implements PdsService{
     @Override
     public List<String> readFtype() {
         return pdsdao.selectFtype();
+    }
+
+    @Override
+    public List<PdsReply> readOnePdsReply(int pno) {
+        return pdsdao.selectPdsReply(pno);
     }
 
 

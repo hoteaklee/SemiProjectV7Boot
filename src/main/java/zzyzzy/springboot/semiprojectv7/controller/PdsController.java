@@ -70,8 +70,9 @@ public class PdsController {
     @GetMapping("/view")
     public String view(int pno, Model m){
 
-        m.addAttribute("pds",pdssrv.readOnePds(pno));
-        m.addAttribute("attach",pdssrv.readOnePdsAttach(pno));
+        m.addAttribute("pds",pdssrv.readOnePds(pno)); //본문내용
+        m.addAttribute("attach",pdssrv.readOnePdsAttach(pno));  //첨부파일 내용
+        m.addAttribute("rplist",pdssrv.readOnePdsReply(pno));  // 댓글 내용
 
         return "pds/view";
     }
