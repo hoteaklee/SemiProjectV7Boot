@@ -30,4 +30,6 @@ public interface PdsService {
     List<String> readFtype();
 
     List<PdsReply> readOnePdsReply(int pno);
+
+    boolean newReply(PdsReply reply);
 }

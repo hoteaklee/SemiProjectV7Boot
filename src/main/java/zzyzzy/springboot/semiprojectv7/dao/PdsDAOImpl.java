@@ -81,5 +81,15 @@ public class PdsDAOImpl implements PdsDAO{
         //pno로 조회하고 refno, regdate 정렬
     }
 
+    @Override
+    public int insertPdsReply(PdsReply reply) {
+        PdsReply p = pdsReplyRepository.save(reply) ;
+        int rpno = Math.toIntExact(p.getRpno());
+
+        pdsReplyRepository.updateRefno(rpno);
+
+        return rpno;
+    }
+
 
 }

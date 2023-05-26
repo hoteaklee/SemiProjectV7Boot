@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import zzyzzy.springboot.semiprojectv7.model.Pds;
 import zzyzzy.springboot.semiprojectv7.model.PdsAttach;
+import zzyzzy.springboot.semiprojectv7.model.PdsReply;
 import zzyzzy.springboot.semiprojectv7.service.PdsService;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -94,5 +97,14 @@ public class PdsController {
         return ResponseEntity.ok().headers(header).body(resource); //리소스는 그파일의 내용을 바디로 보내줌
     }
 
+    @PostMapping("/replyok")
+    public String replyok(PdsReply reply ){
+        String viewPage = "error";
+
+        if (pdssrv.newReply(reply))
+            viewPage = "redirect:/pds/view?pno=" + reply.getPno() ;
+
+        return viewPage;
+    }
 
 }
