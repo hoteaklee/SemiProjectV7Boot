@@ -33,3 +33,35 @@ rpnewbtn?.addEventListener('click', () => {
         rpfrm.submit();
     }
 });
+
+//대댓글 쓰기 모달 띄우기
+let modal = null;
+const showComment =  (refno) => {
+    const frefno = document.querySelector("#refno");
+    const cmtModal = document.querySelector("#cmtModal");
+
+    frefno.value = refno;
+
+    let mymodal = null; // 대댓글 모달창 띄우기
+    try{
+        mymodal = new bootstrap.Modal(cmtModal,{});
+        modal = mymodal;
+    } catch (e){}
+
+    mymodal.show();
+};
+
+//대댓글 쓰기
+const cmtbtn = document.querySelector("#cmtbtn");
+cmtbtn?.addEventListener('click', () => {
+    const cmtfrm = document.forms.cmtfrm;
+    if (cmtfrm.reply.value === '') alert('댓글을 작성하세요!');
+    else if (cmtfrm.userid.value === '') alert('작성자 없어요!');
+    else if (cmtfrm.pno.value === '') alert('본문글번호 없어요!');
+    else if (cmtfrm.refno.value === '') alert('대댓글번호 없어요!');
+    else {
+        cmtfrm.method = 'post';
+        cmtfrm.action = '/pds/rreplyok';
+        cmtfrm.submit();
+    }
+});

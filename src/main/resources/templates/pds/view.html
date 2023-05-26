@@ -84,7 +84,7 @@
                   <td style="width: 25%"><h4 th:text="${rp.userid}"></h4></td>
                   <td>
                       <div style="background: yellow; padding:5px">[[${rp.regdate}]]
-                      <span style="float:right"><a  th:href="|/pds/rreplyok?rpno=${rp.rpno}|">[추가]</a> / [수정] / [삭제]</span></div>
+                      <span style="float:right"><a  th:href="|javascript:showComment(${rp.rpno})|">[추가]</a> / [수정] / [삭제]</span></div>
                     <p style="padding: 5px 0;" th:text="${rp.reply}"></p>
                   </td><!--댓글-->
                 </th:block>
@@ -126,6 +126,31 @@
       </div><!--댓글 작성폼-->
 
     </div>
+
+    <div class="modal hide" id="cmtModal" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">
+              <i class="fa-solid fa-message"> </i>대댓글 쓰기</h3>
+          </div>
+          <div class="modal-body">
+            <form name="cmtfrm" id="cmtfrm"
+                  method="post">
+               <textarea name="reply" id="comment" rows="7"
+                                      cols="60"></textarea>
+              <input type="hidden" name="userid" th:value="${session.UID}">
+              <input type="hidden" name="pno" th:value="${pds.pno}">
+              <input type="hidden" name="refno" id="refno"> <!--모달이 뜨면 값이 들어갈수 있게 함-->
+            </form>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button type="button" id="cmtbtn"
+                    class="btn btn-danger">대댓글 작성</button>
+          </div>
+        </div>
+      </div>
+    </div><!-- 대댓글 쓰기 모달 -->
 
     <script src="/assets/js/pds.js"></script>
 
