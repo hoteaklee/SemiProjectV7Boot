@@ -84,7 +84,10 @@
                   <td style="width: 25%"><h4 th:text="${rp.userid}"></h4></td>
                   <td>
                       <div style="background: yellow; padding:5px">[[${rp.regdate}]]
-                      <span style="float:right"><a  th:href="|javascript:showComment(${rp.rpno})|">[추가]</a> / [수정] / [삭제]</span></div>
+                        <th:block th:if="${not #strings.isEmpty(session.UID)}">
+                           <span style="float:right"><a  th:href="|javascript:showComment(${rp.rpno})|">[추가]</a> / [수정] / [삭제]</span>
+                        </th:block>
+                      </div>
                     <p style="padding: 5px 0;" th:text="${rp.reply}"></p>
                   </td><!--댓글-->
                 </th:block>
@@ -109,7 +112,11 @@
         <div class="offset-2 col-8">
           <form name="rpfrm" id="rpfrm" class="bg-light p-3">
             <div class="row align-items-center">
-              <label class="col-2 form-label " >로그인하세요</label>
+              <label class="col-2 form-label " >
+              <th:block th:if="${#strings.isEmpty(session.UID)}">
+                로그인하세요</th:block>
+                [[${session.UID}]]
+              </label>
 
               <div class="col-8">
                 <textarea id="reply" name="reply" rows="7" class="form-control "></textarea>
