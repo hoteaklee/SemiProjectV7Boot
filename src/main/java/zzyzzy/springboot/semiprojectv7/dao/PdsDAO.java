@@ -26,4 +26,6 @@ public interface PdsDAO {
     List<PdsReply> selectPdsReply(int pno);
 
     int insertPdsReply(PdsReply reply);
+
+    int insertPdsRreply(PdsReply reply);
 }
