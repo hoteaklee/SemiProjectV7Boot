@@ -83,7 +83,7 @@
                 <th:block th:if="${rp.rpno eq rp.refno}">
                   <td style="width: 25%"><h4 th:text="${rp.userid}"></h4></td>
                   <td>
-                      <div style="background: yellow; padding:5px" th:text="${rp.regdate}">
+                      <div style="background: yellow; padding:5px">[[${rp.regdate}]]
                       <span style="float:right">[추가] / [수정] / [삭제]</span></div>
                     <p style="padding: 5px 0;" th:text="${rp.reply}"></p>
                   </td><!--댓글-->
@@ -93,8 +93,8 @@
                 <th:block th:if="${rp.rpno ne rp.refno}">
                   <td style="width: 25%"><h4>&nbsp;</h4></td>
                   <td>
-                    <div style="background: lime; padding:5px " th:text="${rp.userid}">작성자
-                      <span style="float:right" th:text="${rp.regdate}"> [수정] / [삭제]</span></div>
+                    <div style="background: lime; padding:5px ">[[${rp.userid}]]
+                      <span style="float:right" th:text="|${rp.regdate} [수정] / [삭제] |"> </span></div>
                     <p style="padding: 5px 0;" th:text="${rp.reply}">대댓글!</p>
                   </td> <!--대댓글-->
                 </th:block>
@@ -116,7 +116,7 @@
               </div>
               <div class="col-2  ">
                 <button type="button" class="btn btn-dark" >
-                  <i class="fa fa-commenting"></i>댓글쓰기</button>
+                  <i class="fa fa-commenting"> </i>댓글쓰기</button>
                 </div>
             </div>
           </form>
