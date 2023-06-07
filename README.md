@@ -8,3 +8,5 @@
 + lombok
 + spring data jpa
 + querydsl
++ nginx
++ imgscalr
