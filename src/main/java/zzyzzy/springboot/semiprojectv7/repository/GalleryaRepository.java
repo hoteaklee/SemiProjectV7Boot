@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import zzyzzy.springboot.semiprojectv7.model.GalAttach;
 import zzyzzy.springboot.semiprojectv7.model.GalleryList;
+import zzyzzy.springboot.semiprojectv7.model.GalleryView;
 
 
 public interface GalleryaRepository extends JpaRepository<GalAttach, Long> {
@@ -18,4 +19,5 @@ public interface GalleryaRepository extends JpaRepository<GalAttach, Long> {
 
     Page<GalleryList> findAllBy(Pageable paging);
 
+    GalleryView findAllByGno(int gno);
 }
