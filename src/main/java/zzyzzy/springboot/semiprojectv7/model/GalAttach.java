@@ -17,5 +17,9 @@ public class GalAttach {
     private Long gano;
     private String fname;
     private String fsize;
-    private Integer gno;
+    private Integer gno;  // gallery의 gno와 연결 - 외래키
+
+    @OneToOne(optional = false) // outer join을 inner join으로 변경!!
+    @JoinColumn(name="gno", insertable = false,updatable = false)
+    private  Gallery gallery;
 }
