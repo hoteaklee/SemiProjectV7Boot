@@ -51,4 +51,9 @@ public class GalleryDAOImpl implements GalleryDAO{
 
         return gals;
     }
+
+    @Override
+    public Object selectOneGallery(int gno) {
+        return galleryaRepository.findAllByGno(gno);
+    }
 }

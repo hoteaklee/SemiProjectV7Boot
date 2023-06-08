@@ -11,4 +11,6 @@ public interface GalleryDAO {
     int insertGalAttach(GalAttach ga);
 
     Map<String, Object> selectGallery(Integer cpg);
+
+    Object selectOneGallery(int gno);
 }
