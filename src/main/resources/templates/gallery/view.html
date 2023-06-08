@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/template}">
+
+  <th:bock layout:fragment="content">
+    <div id="main">
+      <div class="mt-5">
+        <i class="fa-solid fa-images fa-2xl"> 갤러리 </i>
+        <hr>
+      </div>
+
+      <div class="row mt-5">
+        <div class="row offset-2 col-4">
+          <button type="button" class="btn btn-light col-4" id="prevbtn">
+            <i class="fa fa-chevron-left"> </i> 이전게시물</button>
+
+          <button type="button" class="btn btn-light col-4" id="nextbtn">
+            <i class="fa fa-chevron-right"> </i> 다음게시물</button>
+
+        </div>
+        <div class="col-4 text-end">
+          <th:block th:if="${session.UID ne null}">
+            <button type="button" class="btn btn-success" id="newbtn">
+              <i class="fa fa-plus-circle"> </i> 새글쓰기</button>
+          </th:block>
+        </div>
+      </div>
+
+      <div class="row mt-2 offset-2 col-8">
+        <table>
+          <tr>
+            <th class="vtit" colspan="2" th:text="${gal.gallery.title}">&nbsp;</th>
+          </tr>
+
+          <tr class="vinfo">
+            <td class="text-start" th:text="${gal.gallery.userid}">&nbsp;</td>
+            <td class="text-end"
+                th:text="|${gal.gallery.regdate} / ${gal.gallery.thumbs} / ${gal.gallery.views}|">2023-05-05 12:12:12 / 0 / 0</td>
+          </tr>
+
+          <tr><td class="vcont" colspan="2" >
+            <p th:text="${gal.gallery.content}"></p>
+            <th:block th:each="g : ${#strings.arraySplit(gal.fname, ';')}">
+              <img th:src="|http://localhost/cdn/${g}|">
+            </th:block>
+            &nbsp;
+          </td></tr>
+          <tr>
+            <td class="vinfo" colspan="2" th:with="fsizes =${#strings.arraySplit(gal.fsize, ';')}">
+              <th:block th:each="g , stat: ${#strings.arraySplit(gal.fname, ';')}">
+                <span th:text="|${g} (${fsizes[__${stat.index}__]} KB) |"></span>
+              </th:block>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="row mt-2">
+        <div class="row offset-2 col-4">
+          <th:block th:if="${not #strings.isEmpty(session.UID)}">
+              <button type="button" class="btn btn-warning col-4" id="updbtn">
+                <i class="fa fa-pencil"> </i> 수정하기</button>
+              <button type="button" class="btn btn-danger col-4" id="rmvbtn">
+                <i class="fa fa-trash-o"> </i> 삭제하기</button>
+          </th:block>
+
+        </div>
+        <div class="col-4 text-end">
+          <button type="button" class="btn btn-light" id="listbtn">
+            <i class="fa fa-list"> </i> 목록으로</button>
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <i class="fa-solid fa-comments fa-2xl"> 나도 한마디 </i>
+        <hr>
+      </div>
+
+      <div class="row mt-5">
+        <div class="offset-2 col-8">
+          <form name="rpfrm" id="rpfrm" class="bg-light p-3">
+            <div class="row align-items-center">
+              <label class="col-2 form-label " >
+              <th:block th:if="${#strings.isEmpty(session.UID)}">
+                로그인하세요</th:block>
+                [[${session.UID}]]
+              </label>
+
+              <div class="col-8">
+                <textarea id="reply" name="reply" rows="7" class="form-control "></textarea>
+              </div>
+              <div class="col-2  ">
+                <button type="button" class="btn btn-dark" id="rpnewbtn" >
+                  <i class="fa fa-commenting"> </i>댓글쓰기</button>
+                </div>
+              <input type="hidden" name="userid" id="userid" th:value="${session.UID}">
+              <input type="hidden" name="pno" id="pno" >
+            </div>
+          </form>
+        </div>
+      </div><!--댓글 작성폼-->
+
+    </div>
+
+
+
+    <script src="/assets/js/gallery.js"></script>
+
+  </th:bock>
+
+</html>
