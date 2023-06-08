@@ -41,7 +41,7 @@
       <div class="row justify-content-center">
         <div th:each="gal : ${gallist}"
                 class="card co1-12 m-3" style="width: 18rem;">
-          <a href="|/gallery/view?gno=${gal.gallery.gno}|">
+          <a th:href="|/gallery/view?gno=${gal.gallery.gno}|">
           <img th:src="|http://localhost/cdn/_thumbs/small_${#strings.arraySplit(gal.fname, ';')[0]}|"
                class="card-img-top" alt="..."></a>
           <div class="card-body">
